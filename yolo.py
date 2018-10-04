@@ -66,6 +66,10 @@ class YOLO(object):
         num_anchors = len(self.anchors)
         num_classes = len(self.class_names)
         is_tiny_version = num_anchors==6 # default setting
+        print(is_tiny_version)
+        print(num_anchors)
+        print(num_classes)
+        print(model_path)
         try:
             self.yolo_model = load_model(model_path, compile=False)
         except:
@@ -136,6 +140,7 @@ class YOLO(object):
             score = out_scores[i]
 
             label = '{} {:.2f}'.format(predicted_class, score)
+            image = image.convert('RGB')
             draw = ImageDraw.Draw(image)
             label_size = draw.textsize(label, font)
 
